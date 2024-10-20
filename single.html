@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Generator for a Link</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #4a90e2;
+    }
+
+    label {
+      font-size: 1rem;
+      color: #666;
+      display: block;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: #4a90e2;
+      outline: none;
+      box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    button:hover {
+      background-color: #357abd;
+    }
+
+    #qrcode {
+      margin-top: 20px;
+    }
+
+    .redirect-btn {
+      background-color: #28a745;
+    }
+
+    .redirect-btn:hover {
+      background-color: #218838;
+    }
+
+    /* Responsive design for smaller screens */
+    @media (max-width: 400px) {
+      .container {
+        width: 90%;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>QR Code Generator</h1>
+    
+    <label for="link">Enter a URL:</label>
+    <input type="text" id="link" placeholder="https://example.com">
+    
+    <button onclick="generateQRCode()">Generate QR Code</button>
+
+    <!-- Container to display the QR Code -->
+    <div id="qrcode"></div>
+
+    <!-- Redirect button -->
+    <button class="redirect-btn" onclick="redirectToMultipleQR()">QR for multiple links</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    function generateQRCode() {
+      const link = document.getElementById('link').value;
+
+      if (link.trim() !== '') {
+        document.getElementById('qrcode').innerHTML = '';
+        new QRCode(document.getElementById('qrcode'), {
+          text: link,
+          width: 128,
+          height: 128
+        });
+      } else {
+        alert("Please enter a valid URL.");
+      }
+    }
+
+    function redirectToMultipleQR() {
+      window.location.href = 'multipleqr.html';
+    }
+  </script>
+
+</body>
+</html>
